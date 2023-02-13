@@ -2,14 +2,14 @@
 
 /**
  * @link              https://estradaenterprises.biz/
- * @since             0.0.1
+ * @since             0.0.2
  * @package           Woo_Percent_and_or_Recurring_Percent_Coupon_Type
  *
  * @wordpress-plugin
  * Plugin Name:       Woo Percent and or Recurring Percent Coupon Type
  * Plugin URI:        https://estradaenterprises.biz/
  * Description:       WordPress Plugin
- * Version:           0.0.1
+ * Version:           0.0.2
  * Author:            Estrada Enterprises
  * Author URI:        https://estradaenterprises.biz/
  * License:           GPL-2.0+
@@ -22,7 +22,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'WPAORPCT_WP_VERSION', '0.0.1' );
+define( 'WPAORPCT_WP_VERSION', '0.0.2' );
 
 function woo_percent_and_or_recurring_percent_coupon_type_init() {
     require_once plugin_dir_path( __FILE__ ) . 'inc/woocommerce.php';
