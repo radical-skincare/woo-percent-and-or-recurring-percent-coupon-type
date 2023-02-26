@@ -44,33 +44,33 @@ function wp_ajax_new_custom_coupon() {
   $res = ['success'=>true];
   $order = new WC_Order( $_POST['order_id'] );
   $coupon = new WC_Coupon($_POST['coupon']);
-  if(!$coupon->get_id()){
-    $res['success'] = false;
-    $res['message'] = 'Coupon code is not found.';
-    echo json_encode($res);
-    wp_die();
-  }
+  // if(!$coupon->get_ID()){
+  //   $res['success'] = false;
+  //   $res['message'] = 'Coupon code is not found.';
+  //   echo json_encode($res);
+  //   wp_die();
+  // }
 
-  if (!$coupon->is_type('percent_andor_recurring_percent')){
-    $res['success'] = false;
-    $res['message'] = 'Coupon code only compatible with Percent And Or Recurring Percent.';
-    echo json_encode($res);
-    wp_die();
-  }
-  $discount_total = $coupon->get_amount();
+  // if ($coupon->is_type('percent_andor_recurring_percent')){
+  //   $discount_total = $coupon->get_amount();
+  //   foreach($order->get_items() as $order_item){
+  //     $product_id = $order_item->get_product_id();
+  //     $total = $order_item->get_total();
+  //     $order_item->set_subtotal($total);
+  //     $discount = (( $total / 100) * $discount_total );
+  //     $order_item->set_total($total - $discount);
+  //     $order_item->save();
+  //   }
+  //   $item = new WC_Order_Item_Coupon();
+  //   $item->set_props(array('code' => $_POST['coupon'], 'discount' => $discount_total, 'discount_tax' => 0));
+  //   $order->add_item($item);
+  // } else {
+  //   $order->apply_coupon($coupon);
+  // }
+  $order->apply_coupon($coupon);
 
-  foreach($order->get_items() as $order_item){
-    $product_id = $order_item->get_product_id();
-    $total = $order_item->get_total();
-    $order_item->set_subtotal($total);
-    $discount = (( $total / 100) * $discount_total );
-    $order_item->set_total($total - $discount);
-    $order_item->save();
-  }
-  $item = new WC_Order_Item_Coupon();
-  $item->set_props(array('code' => $_POST['coupon'], 'discount' => $discount_total, 'discount_tax' => 0));
-  $order->add_item($item);
-  $order->calculate_totals();
+
+  $order->calculate_totals( true );
   $order->save();
   echo json_encode($res);
   wp_die();
